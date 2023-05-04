@@ -2,6 +2,8 @@
 
 {% block content %}
 <div id="reportbro"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
 
 <script type="text/javascript">
 
@@ -18,6 +20,12 @@ function saveReport() {
             // report definition saved successfully,
             // set modified flag to false to disable save button
             rb.setModified(false);
+
+        // save report definition as a file
+        var reportJson = JSON.stringify(report);
+        var blob = new Blob([reportJson], {type: "application/json"});
+        saveAs(blob, "report_template.json");
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert('saving report failed');
@@ -28,7 +36,15 @@ function saveReport() {
 $(document).ready(function() {
     rb = $('#reportbro').reportBro({
         reportServerUrl: "{% url 'albums:report_run' %}",
-        saveCallback: saveReport
+        saveCallback: saveReport,
+        //const rb = new ReportBro(document.getElementById('reportbro'), {
+        //remove reportServerUrl if you want to use the default report server for a quick start
+        //reportServerUrl: 'http://localhost:5000/report/run',
+        //adminMode: false,
+        //showGrid: false,
+        //enableSpreadsheet: false,
+        additionalFonts: [ { name: 'PMingLiU', value: 'PMingLiU'}, { name: 'Arial', value: 'arial'}, { name: 'Arial Narrow', value: 'arialn'}],
+        menuShowDebug: true
     });
     var report = {{report_definition}};
     if (report) {

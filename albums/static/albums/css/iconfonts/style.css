@@ -8,6 +8,27 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: '';
+  src: 
+    url('/albums/fonts/PMingLiU.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+/* @font-face {
+  font-family: 'PMingLiU';
+  src: 
+    url('/albums/fonts/PMingLiUBd.ttf');
+  font-weight: normal;
+  font-style: bold;
+}
+@font-face {
+  font-family: 'PMingLiU';
+  src: 
+    url('/albums/fonts/PMingLiUIt.ttf');
+  font-weight: normal;
+  font-style: italic;
+} */
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */

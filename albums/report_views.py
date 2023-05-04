@@ -58,7 +58,29 @@ def run(request):
         # Access-Control-Allow headers in the response so the browser sends the following get/put request
         return response
 
-    additional_fonts = []
+    additional_fonts = [
+        dict(
+            value='PMingLiU', 
+            filename='PMingLiU.ttf', 
+            bold_filename='PMingLiUBd.ttf', 
+            italic_filename='PMingLiUIt.ttf', 
+            bold_italic_filename='PMingLiUBI.ttf'
+            ),
+        dict(
+            value='arial', 
+            filename='arial.ttf', 
+            bold_filename='arialbd.ttf', 
+            italic_filename='ariali.ttf', 
+            bold_italic_filename='arialbi.ttf'
+            ),
+        dict(
+            value='arialn', 
+            filename='arialn.ttf', 
+            bold_filename='arialnb.ttf', 
+            italic_filename='arialni.ttf', 
+            bold_italic_filename='arialnbi.ttf'
+            )        
+        ]
     # add additional fonts here if additional fonts are used in ReportBro Designer
 
     if request.method == 'PUT':
@@ -209,6 +231,7 @@ def save(request, report_type):
         documentProperties=json_data.get('documentProperties'), version=json_data.get('version')))
 
     now = datetime.datetime.now()
+
     if ReportDefinition.objects.filter(report_type=report_type).update(
             report_definition=report_definition, last_modified_at=now) == 0:
         ReportDefinition.objects.create(
